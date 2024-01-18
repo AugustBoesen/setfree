@@ -1,82 +1,100 @@
 extends CharacterBody3D
 
-const WALKING_SPEED = 5
-const RUNNING_SPEED = 10
-var SPEED;
-const JUMP_VELOCITY = 15
-const DOUBLEJUMP_VELOCITY = 10
+@onready var anim = $PlayerSprite
 
-# Get the gravity from the project settings to be synced with RigidBody nodes.
-var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
+var speed
+var walking_speed = 6
+var running_speed = 11
 
-#Initialize values for double jump mechanic
-var jumps_left: int
-var jumps_amount = 1
+var gravity := -25
 
+var h_accel := 50
+var v_accel := 35
 
+var jump_velocity := 15
+var doublejump_velocity := 10
+@export var max_jumps = 2
+var jump_amount = 2
+
+var movement_vector := Vector3.ZERO
+
+var jumpripple = load("res://scenes/player/doublejump_ripple.tscn")
+	
+func handle_animations():
+# Flip sprite
+	if velocity.x < -0.1:
+		anim.flip_h = true
+	if velocity.x > 0.1:
+		anim.flip_h = false
+		
+# Idle
+	if is_on_floor() and velocity.x == 0 and velocity.z == 0:
+		anim.play("idle")
+		
+# Walking and running
+	if is_on_floor() and velocity.x != 0 or velocity.z != 0:
+		if Input.is_action_pressed("run"):
+			anim.play("run")
+		else:
+			anim.play("walk")
+
+#Ascending and descending
+	if not is_on_floor() and velocity.y != 0:
+		if velocity.y > 0:
+			anim.play("ascend")
+		elif velocity.y < -10:
+			anim.play("descend")
+		else:
+			anim.play("midair")
+		
+func player_movement(delta):
+#Toggle running
+	if Input.is_action_pressed("run"):
+		speed = running_speed
+	else:
+		speed = walking_speed
+
+# Horizontal movement
+	var horizontal_input := Vector3.ZERO
+	horizontal_input.x = Input.get_axis("move_left", "move_right")
+	horizontal_input.z = Input.get_axis("move_up", "move_down")
+	horizontal_input = horizontal_input.limit_length(1)
+	horizontal_input *= speed
+	horizontal_input.y = movement_vector.y
+	movement_vector = movement_vector.move_toward(horizontal_input, h_accel * delta)
+	
+# Gravity
+	movement_vector.y = move_toward(movement_vector.y, gravity, v_accel * delta)
+
+# Optimization
+	set_velocity(movement_vector)
+	set_up_direction(Vector3.UP)
+
+func jumping():
+# Basic jump
+	if Input.is_action_just_pressed("jump") and is_on_floor():
+		velocity.y = jump_velocity
+# Double jump
+	if is_on_floor():
+		jump_amount = max_jumps
+	if jump_amount > 0:
+		if Input.is_action_just_pressed("jump") and not is_on_floor() and velocity.y < 5:
+			velocity.y = doublejump_velocity
+			jump_amount -= 1
+			# Ripple animation spawning mechanic
+			var ripple = jumpripple.instantiate()
+			add_child(ripple)
+			ripple.emitting = true
+
+func hovering():
+	#If space is pressed, the mid-air animation loops, creating a 'flying' effect
+	if not is_on_floor() and Input.is_action_pressed("jump") and velocity.y < -8:
+		velocity.y = -8
 
 func _physics_process(delta):
-	# Add the gravity.
-	if not is_on_floor():
-		velocity.y -= gravity * delta
-
-	# Handle jump.
-	if Input.is_action_just_pressed("jump") and is_on_floor():
-		velocity.y = JUMP_VELOCITY
-		
-	# Handle double jump
-	if is_on_floor():
-		jumps_left = jumps_amount
-	if not is_on_floor():
-		if jumps_left > 0:
-			if Input.is_action_just_pressed("jump"):
-				jumps_left -= 1
-				velocity.y = DOUBLEJUMP_VELOCITY
-				
-	# Handle speed
-	if Input.is_action_pressed("run"):
-		SPEED = RUNNING_SPEED
-	else:
-		SPEED = WALKING_SPEED
-
-	# Get the input direction and handle the movement/deceleration.
-	# As good practice, you should replace UI actions with custom gameplay actions.
-	var input_dir = Input.get_vector("move_left", "move_right", "move_up", "move_down")
-	var direction = (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
-	if direction:
-		velocity.x = direction.x * SPEED
-		velocity.z = direction.z * SPEED
-	else:
-		velocity.x = move_toward(velocity.x, 0, SPEED)
-		velocity.z = move_toward(velocity.z, 0, SPEED)
-
+	player_movement(delta)
 	move_and_slide()
-	
-	# Flip sprite based on direction
-	if velocity.x < 0:
-		$PlayerSprite.flip_h = true
-	if velocity.x > 0:
-		$PlayerSprite.flip_h = false
-	
-	# Idle animation
-	if velocity.x == 0 and velocity.z == 0 and is_on_floor():
-		$PlayerSprite.play("idle")
-		
-	# Walking animation
-	elif (velocity.x != 0 or velocity.z != 0) and not Input.is_action_pressed("run") and is_on_floor():
-		$PlayerSprite.play("walk")
-		
-	# Running animation
-	elif (velocity.x != 0 or velocity.z != 0) and Input.is_action_pressed("run") and is_on_floor():
-		$PlayerSprite.play("run")
-		
-	# Jumping animation
-	if velocity.y > 0 and not is_on_floor():
-		$PlayerSprite.play("ascend")	
-		if $PlayerSprite.animation_finished:
-			$PlayerSprite.stop()
-	elif velocity.y < 0 and not is_on_floor():
-		$PlayerSprite.play("descend")
-		if $PlayerSprite.animation_finished:
-			$PlayerSprite.stop()
-
+	handle_animations()
+	jumping()
+	hovering()
+	movement_vector = velocity
