@@ -8,4 +8,14 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	pass
+		var objectsInRange = get_overlapping_areas()
+		var glow = get_parent_node_3d().get_surface_override_material(1)
+		if objectsInRange == []:
+			pass
+		if objectsInRange != []:
+			var objectInRange = objectsInRange[0]
+			if objectInRange.get_parent_node_3d() is Player:
+				
+				glow.emission_energy_multiplier = 9
+		else:
+			glow.emission_energy_multiplier = 1
