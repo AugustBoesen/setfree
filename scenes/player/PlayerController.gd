@@ -2,6 +2,8 @@ extends CharacterBody3D
 
 @onready var anim = $PlayerSprite
 
+var crystals = 0
+
 var speed
 var walking_speed = 6
 var running_speed = 11
@@ -90,6 +92,20 @@ func hovering():
 	#If space is pressed, the mid-air animation loops, creating a 'flying' effect
 	if not is_on_floor() and Input.is_action_pressed("jump") and velocity.y < -8:
 		velocity.y = -8
+		
+func activate():
+	if Input.is_action_just_pressed("activate"):
+		print("katsotaas")
+		var objectsInRange = $ActivateArea.get_overlapping_areas()
+		if objectsInRange == []:
+			print("ei objekteja")
+		if objectsInRange != []:
+			var objectInRange = objectsInRange[0]
+			if objectInRange is CrystalActivate:
+				print("löyty")
+				objectInRange.get_parent_node_3d().queue_free()
+				crystals += 1
+
 
 func _physics_process(delta):
 	player_movement(delta)
@@ -97,4 +113,5 @@ func _physics_process(delta):
 	handle_animations()
 	jumping()
 	hovering()
+	activate()
 	movement_vector = velocity
