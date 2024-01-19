@@ -1,7 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://dwyv84hvnv2ed"]
+[gd_scene load_steps=9 format=3 uid="uid://dwyv84hvnv2ed"]
 
 [ext_resource type="ArrayMesh" uid="uid://c3v3krcrbpqso" path="res://assets/models/crystal/Crystal.obj" id="1_dg1x1"]
 [ext_resource type="Script" path="res://scenes/items/crystal/Crystal.gd" id="2_kupou"]
+[ext_resource type="AudioStream" uid="uid://cukn3uim346hp" path="res://assets/audio/items/crystal.mp3" id="3_7b01m"]
+[ext_resource type="Script" path="res://scenes/items/crystal/CrystalAudio.gd" id="4_a7hkk"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jk186"]
 emission_enabled = true
@@ -38,3 +40,8 @@ mesh = SubResource("PlaneMesh_3p8dq")
 emission_shape = 1
 emission_sphere_radius = 2.29
 gravity = Vector3(0, 1, 0)
+
+[node name="Bells rolling in a metal pipe" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("3_7b01m")
+unit_size = 2.0
+script = ExtResource("4_a7hkk")

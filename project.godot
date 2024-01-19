@@ -15,10 +15,6 @@ run/main_scene="res://levels/TEST.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
 config/icon="res://icon.svg"
 
-[filesystem]
-
-import/fbx/enabled=false
-
 [input]
 
 move_left={
@@ -65,3 +61,7 @@ activate={
 [physics]
 
 3d/default_gravity=50.0
+
+[rendering]
+
+environment/defaults/default_clear_color=Color(0, 0.027451, 0.0431373, 1)

@@ -16,6 +16,6 @@ func _process(delta):
 			var objectInRange = objectsInRange[0]
 			if objectInRange.get_parent_node_3d() is Player:
 				
-				glow.emission_energy_multiplier = 9
+				glow.emission_energy_multiplier = 13
 		else:
 			glow.emission_energy_multiplier = 1

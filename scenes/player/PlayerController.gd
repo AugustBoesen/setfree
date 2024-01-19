@@ -7,7 +7,7 @@ class_name Player
 @onready var walksound = $WalkSound
 var jumpripple = load("res://scenes/player/doublejump_ripple.tscn")
 
-var crystals = 0
+var crystalsCollected = 0
 
 var speed
 var walking_speed = 6
@@ -114,7 +114,6 @@ func hovering():
 		
 func activate():
 	if Input.is_action_just_pressed("activate"):
-		print("katsotaas")
 		var objectsInRange = $ActivateArea.get_overlapping_areas()
 		if objectsInRange == []:
 			print("ei objekteja")
@@ -123,7 +122,7 @@ func activate():
 			if objectInRange is CrystalActivate:
 				print("löyty")
 				objectInRange.get_parent_node_3d().queue_free()
-				crystals += 1
+				crystalsCollected += 1
 
 
 func _physics_process(delta):
