@@ -1,7 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://dwyv84hvnv2ed"]
+[gd_scene load_steps=7 format=3 uid="uid://dwyv84hvnv2ed"]
 
 [ext_resource type="ArrayMesh" uid="uid://c3v3krcrbpqso" path="res://assets/models/crystal/Crystal.obj" id="1_dg1x1"]
-[ext_resource type="Script" path="res://scenes/items/Crystal.gd" id="2_kupou"]
+[ext_resource type="Script" path="res://scenes/items/crystal/Crystal.gd" id="2_kupou"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jk186"]
 emission_enabled = true
@@ -11,7 +11,16 @@ emission_energy_multiplier = 3.0
 [sub_resource type="SphereShape3D" id="SphereShape3D_d0v4t"]
 radius = 3.0
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mmocp"]
+emission_enabled = true
+emission = Color(0, 0.796078, 0.882353, 1)
+emission_energy_multiplier = 7.0
+billboard_mode = 1
+
 [sub_resource type="PlaneMesh" id="PlaneMesh_3p8dq"]
+material = SubResource("StandardMaterial3D_mmocp")
+size = Vector2(0.1, 0.1)
+orientation = 2
 
 [node name="Crystal" type="MeshInstance3D"]
 transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0, 0)
@@ -26,3 +35,6 @@ shape = SubResource("SphereShape3D_d0v4t")
 
 [node name="CPUParticles3D" type="CPUParticles3D" parent="."]
 mesh = SubResource("PlaneMesh_3p8dq")
+emission_shape = 1
+emission_sphere_radius = 2.29
+gravity = Vector3(0, 1, 0)

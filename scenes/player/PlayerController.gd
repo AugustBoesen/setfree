@@ -2,6 +2,10 @@ extends CharacterBody3D
 
 @onready var anim = $PlayerSprite
 
+@onready var ripplesound = $RippleSound
+@onready var walksound = $WalkSound
+var jumpripple = load("res://scenes/player/doublejump_ripple.tscn")
+
 var crystals = 0
 
 var speed
@@ -20,7 +24,7 @@ var jump_amount = 2
 
 var movement_vector := Vector3.ZERO
 
-var jumpripple = load("res://scenes/player/doublejump_ripple.tscn")
+
 	
 func handle_animations():
 # Flip sprite
@@ -37,8 +41,18 @@ func handle_animations():
 	if is_on_floor() and velocity.x != 0 or velocity.z != 0:
 		if Input.is_action_pressed("run"):
 			anim.play("run")
+			# Running sound
+			if $WalkSound/WalkTimer.time_left <= 0 and is_on_floor():
+				walksound.pitch_scale = randf_range(0.8, 1.2)
+				walksound.play()
+				$WalkSound/WalkTimer.start(0.2)
 		else:
 			anim.play("walk")
+			# Walking sound
+			if $WalkSound/WalkTimer.time_left <= 0 and is_on_floor():
+				walksound.pitch_scale = randf_range(0.8, 1.2)
+				walksound.play()
+				$WalkSound/WalkTimer.start(0.3)
 
 #Ascending and descending
 	if not is_on_floor() and velocity.y != 0:
@@ -87,6 +101,10 @@ func jumping():
 			var ripple = jumpripple.instantiate()
 			add_child(ripple)
 			ripple.emitting = true
+			
+			# Ripple sound
+			ripplesound.pitch_scale = randf_range(0.95, 1.05)
+			ripplesound.play()
 
 func hovering():
 	#If space is pressed, the mid-air animation loops, creating a 'flying' effect

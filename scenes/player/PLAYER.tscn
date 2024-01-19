@@ -1,7 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://pn00x1qgic1r"]
+[gd_scene load_steps=7 format=3 uid="uid://pn00x1qgic1r"]
 
 [ext_resource type="Script" path="res://scenes/player/PlayerController.gd" id="1_m2aip"]
 [ext_resource type="SpriteFrames" uid="uid://6ef8vlwebsd6" path="res://scenes/player/PlayerAnimatedSprite.tres" id="2_w2bx4"]
+[ext_resource type="AudioStream" uid="uid://c6qfyto1onfg0" path="res://assets/audio/player/ripple.mp3" id="3_1x3no"]
+[ext_resource type="AudioStream" uid="uid://dn3keg7ktltx4" path="res://assets/audio/player/walk.mp3" id="4_odkdd"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_erspx"]
 
@@ -34,3 +36,14 @@ animation = &"run"
 
 [node name="ActivateCollision" type="CollisionShape3D" parent="ActivateArea"]
 shape = SubResource("SphereShape3D_vx2mg")
+
+[node name="RippleSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_1x3no")
+max_polyphony = 2
+
+[node name="WalkSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_odkdd")
+
+[node name="WalkTimer" type="Timer" parent="WalkSound"]
+wait_time = 0.5
+one_shot = true

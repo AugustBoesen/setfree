@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://pn00x1qgic1r" path="res://scenes/player/PLAYER.tscn" id="1_q2eer"]
 [ext_resource type="Script" path="res://scenes/player/PlayerCamera.gd" id="2_1cr6a"]
-[ext_resource type="PackedScene" uid="uid://dwyv84hvnv2ed" path="res://scenes/items/crystal.tscn" id="3_s11to"]
+[ext_resource type="PackedScene" uid="uid://dwyv84hvnv2ed" path="res://scenes/items/crystal/crystal.tscn" id="3_s11to"]
 
 [sub_resource type="Environment" id="Environment_suqdm"]
 glow_enabled = true
@@ -46,4 +46,4 @@ offset = Vector3(0, 5, 8)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.714095, 2.54038, -1.62304)
 
 [node name="Crystal" parent="." instance=ExtResource("3_s11to")]
-transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, -4.97172, -1.29703, 4.81951)
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, -5.06463, -1.29703, 5.13036)
