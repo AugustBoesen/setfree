@@ -1,14 +1,17 @@
-[gd_scene load_steps=7 format=3 uid="uid://pn00x1qgic1r"]
+[gd_scene load_steps=9 format=3 uid="uid://pn00x1qgic1r"]
 
 [ext_resource type="Script" path="res://scenes/player/PlayerController.gd" id="1_m2aip"]
 [ext_resource type="SpriteFrames" uid="uid://6ef8vlwebsd6" path="res://scenes/player/PlayerAnimatedSprite.tres" id="2_w2bx4"]
 [ext_resource type="AudioStream" uid="uid://c6qfyto1onfg0" path="res://assets/audio/player/ripple.mp3" id="3_1x3no"]
 [ext_resource type="AudioStream" uid="uid://dn3keg7ktltx4" path="res://assets/audio/player/walk.mp3" id="4_odkdd"]
+[ext_resource type="PackedScene" uid="uid://do0p8lb4h63vb" path="res://scenes/TransitionScreen.tscn" id="5_ut1p5"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_erspx"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_vx2mg"]
 radius = 2.47455
+
+[sub_resource type="SeparationRayShape3D" id="SeparationRayShape3D_3hajb"]
 
 [node name="PLAYER" type="CharacterBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
@@ -20,10 +23,10 @@ shape = SubResource("CapsuleShape3D_erspx")
 
 [node name="OmniLight3D" type="OmniLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.965926, 0.258819, 0, -0.258819, 0.965926, 0, 0.398468, 0.215466)
+light_energy = 0.8
 light_specular = 0.0
-shadow_enabled = true
 omni_range = 25.0
-omni_attenuation = 1.36605
+omni_attenuation = 0.267946
 
 [node name="PlayerSprite" type="AnimatedSprite3D" parent="."]
 transform = Transform3D(6.325, 0, 0, 0, 6.10948, 1.63703, 0, -1.63703, 6.10948, 0, -5.96046e-08, -2.38419e-07)
@@ -47,3 +50,12 @@ stream = ExtResource("4_odkdd")
 [node name="WalkTimer" type="Timer" parent="WalkSound"]
 wait_time = 0.5
 one_shot = true
+
+[node name="FaderTransition" parent="." instance=ExtResource("5_ut1p5")]
+
+[node name="SpringArm3D" type="SpringArm3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.819152, 0.573576, 0, -0.573576, 0.819152, 0, 0, 0)
+shape = SubResource("SeparationRayShape3D_3hajb")
+spring_length = 10.0
+
+[node name="Camera3D" type="Camera3D" parent="SpringArm3D"]

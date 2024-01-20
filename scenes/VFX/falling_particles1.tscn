@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=3 uid="uid://ct7uqjoqydgpd"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sm2xf"]
+emission_enabled = true
+emission = Color(1, 1, 1, 1)
+emission_energy_multiplier = 0.2
+
+[sub_resource type="SphereMesh" id="SphereMesh_t4onq"]
+material = SubResource("StandardMaterial3D_sm2xf")
+radius = 0.01
+height = 0.01
+
+[node name="Node3D" type="Node3D"]
+
+[node name="CPUParticles3D" type="CPUParticles3D" parent="."]
+amount = 20
+lifetime = 5.0
+mesh = SubResource("SphereMesh_t4onq")
+emission_shape = 1
+emission_sphere_radius = 5.0
+gravity = Vector3(0, 0.02, 0)

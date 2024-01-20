@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://cniryu5ef56yx"]
+[gd_scene load_steps=10 format=3 uid="uid://cniryu5ef56yx"]
 
 [ext_resource type="Script" path="res://scenes/player/doublejump.gd" id="1_amr84"]
 
@@ -28,6 +28,20 @@ colors = PackedColorArray(0, 0, 0, 1, 1, 1, 1, 0)
 [sub_resource type="Gradient" id="Gradient_o2wg0"]
 colors = PackedColorArray(0, 0, 0, 1, 1, 1, 1, 0)
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mkqi0"]
+emission_enabled = true
+emission = Color(0, 0.592157, 0.568627, 1)
+emission_energy_multiplier = 5.0
+
+[sub_resource type="SphereMesh" id="SphereMesh_ocwij"]
+material = SubResource("StandardMaterial3D_mkqi0")
+radius = 0.01
+height = 0.01
+
+[sub_resource type="Curve" id="Curve_omwma"]
+_data = [Vector2(0, 0), 0.0, 3.91209, 0, 0, Vector2(0.101124, 1), 0.18629, 0.18629, 0, 0, Vector2(1, 0), -5.70513, 0.0, 0, 0]
+point_count = 3
+
 [node name="DoubleJump_Ripple" type="CPUParticles3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.925767, 0)
 emitting = false
@@ -48,5 +62,15 @@ script = ExtResource("1_amr84")
 [node name="Timer" type="Timer" parent="."]
 one_shot = true
 autostart = true
+
+[node name="CPUParticles3D" type="CPUParticles3D" parent="."]
+amount = 30
+explosiveness = 0.61
+lifetime_randomness = 1.0
+mesh = SubResource("SphereMesh_ocwij")
+gravity = Vector3(0, 1, 0)
+initial_velocity_max = 3.0
+angular_velocity_max = 305.45
+scale_amount_curve = SubResource("Curve_omwma")
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
