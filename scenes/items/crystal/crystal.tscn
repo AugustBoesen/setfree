@@ -1,14 +1,15 @@
 [gd_scene load_steps=9 format=3 uid="uid://dwyv84hvnv2ed"]
 
 [ext_resource type="ArrayMesh" uid="uid://c3v3krcrbpqso" path="res://assets/models/crystal/Crystal.obj" id="1_dg1x1"]
-[ext_resource type="Script" path="res://scenes/items/crystal/Crystal.gd" id="2_kupou"]
+[ext_resource type="Script" path="res://scripts/Crystal.gd" id="2_kupou"]
 [ext_resource type="AudioStream" uid="uid://cukn3uim346hp" path="res://assets/audio/items/crystal.mp3" id="3_7b01m"]
-[ext_resource type="Script" path="res://scenes/items/crystal/CrystalAudio.gd" id="4_a7hkk"]
+[ext_resource type="Script" path="res://scripts/CrystalAudio.gd" id="4_a7hkk"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jk186"]
+metallic = 1.0
+metallic_specular = 1.0
 emission_enabled = true
-emission = Color(0, 0.588235, 0.545098, 1)
-emission_energy_multiplier = 3.0
+emission = Color(0, 0.235294, 0.215686, 1)
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_d0v4t"]
 radius = 3.0

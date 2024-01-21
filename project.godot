@@ -11,9 +11,14 @@ config_version=5
 [application]
 
 config/name="Set Free"
-run/main_scene="res://levels/Level0.tscn"
+run/main_scene="res://scenes/UI/main_menu.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
+boot_splash/bg_color=Color(0.0588235, 0.0588235, 0.0588235, 1)
 config/icon="res://icon.svg"
+
+[autoload]
+
+SceneManager="*res://scenes/scene_manager.tscn"
 
 [editor_plugins]
 
@@ -68,4 +73,4 @@ activate={
 
 [rendering]
 
-environment/defaults/default_clear_color=Color(0, 0.027451, 0.0431373, 1)
+environment/defaults/default_clear_color=Color(0.12549, 0.152941, 0.160784, 1)

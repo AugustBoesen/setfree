@@ -1,15 +1,15 @@
 [gd_scene load_steps=9 format=3 uid="uid://pn00x1qgic1r"]
 
-[ext_resource type="Script" path="res://scenes/player/PlayerController.gd" id="1_m2aip"]
+[ext_resource type="Script" path="res://scripts/PlayerController.gd" id="1_m2aip"]
 [ext_resource type="SpriteFrames" uid="uid://6ef8vlwebsd6" path="res://scenes/player/PlayerAnimatedSprite.tres" id="2_w2bx4"]
 [ext_resource type="AudioStream" uid="uid://c6qfyto1onfg0" path="res://assets/audio/player/ripple.mp3" id="3_1x3no"]
 [ext_resource type="AudioStream" uid="uid://dn3keg7ktltx4" path="res://assets/audio/player/walk.mp3" id="4_odkdd"]
-[ext_resource type="PackedScene" uid="uid://do0p8lb4h63vb" path="res://scenes/TransitionScreen.tscn" id="5_ut1p5"]
+[ext_resource type="Environment" uid="uid://d1s668e7k1he6" path="res://shaders/Camera.tres" id="5_sor15"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_erspx"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_vx2mg"]
-radius = 2.47455
+radius = 2.26269
 
 [sub_resource type="SeparationRayShape3D" id="SeparationRayShape3D_3hajb"]
 
@@ -51,11 +51,10 @@ stream = ExtResource("4_odkdd")
 wait_time = 0.5
 one_shot = true
 
-[node name="FaderTransition" parent="." instance=ExtResource("5_ut1p5")]
-
-[node name="SpringArm3D" type="SpringArm3D" parent="."]
+[node name="CameraSpringArm" type="SpringArm3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.819152, 0.573576, 0, -0.573576, 0.819152, 0, 0, 0)
 shape = SubResource("SeparationRayShape3D_3hajb")
 spring_length = 10.0
 
-[node name="Camera3D" type="Camera3D" parent="SpringArm3D"]
+[node name="PlayerCamera" type="Camera3D" parent="CameraSpringArm"]
+environment = ExtResource("5_sor15")

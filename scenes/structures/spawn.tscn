@@ -1,7 +1,9 @@
-[gd_scene load_steps=10 format=3 uid="uid://c6gpsnjast360"]
+[gd_scene load_steps=12 format=3 uid="uid://c6gpsnjast360"]
 
-[ext_resource type="Script" path="res://scenes/structures/CompleteLevel.gd" id="1_k6761"]
+[ext_resource type="Script" path="res://scripts/CompleteLevel.gd" id="1_k6761"]
 [ext_resource type="PackedScene" uid="uid://do0p8lb4h63vb" path="res://scenes/TransitionScreen.tscn" id="2_2ufry"]
+[ext_resource type="AudioStream" uid="uid://hpcwoenopegc" path="res://assets/audio/events/shortjingle.mp3" id="2_twutt"]
+[ext_resource type="AudioStream" uid="uid://6mrgx7nlyydy" path="res://assets/audio/events/warppad.mp3" id="3_aooin"]
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_wu23p"]
 
@@ -66,4 +68,12 @@ emission_ring_inner_radius = 0.8
 gravity = Vector3(0, 12, 0)
 linear_accel_max = 12.11
 
+[node name="ActivationNoise" type="AudioStreamPlayer3D" parent="CompleteQuestArea"]
+transform = Transform3D(0.166667, 0, 0, 0, 0.166667, 0, 0, 0, 0.166667, 0, 0.241025, 0)
+stream = ExtResource("3_aooin")
+volume_db = -5.0
+
 [node name="FaderTransition" parent="CompleteQuestArea" instance=ExtResource("2_2ufry")]
+
+[node name="CompletionNoise" type="AudioStreamPlayer" parent="CompleteQuestArea"]
+stream = ExtResource("2_twutt")

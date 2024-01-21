@@ -1,0 +1,76 @@
+[gd_scene load_steps=10 format=3 uid="uid://cniryu5ef56yx"]
+
+[ext_resource type="Script" path="res://scripts/doublejump.gd" id="1_tjq77"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ohnbh"]
+transparency = 1
+specular_mode = 1
+vertex_color_use_as_albedo = true
+albedo_color = Color(0, 0.443137, 0.482353, 1)
+emission_enabled = true
+emission = Color(0, 0.709804, 0.882353, 1)
+emission_energy_multiplier = 5.9
+clearcoat_enabled = true
+
+[sub_resource type="TorusMesh" id="TorusMesh_om0gn"]
+material = SubResource("StandardMaterial3D_ohnbh")
+inner_radius = 1.197
+outer_radius = 1.157
+
+[sub_resource type="Curve" id="Curve_6tldr"]
+_data = [Vector2(0, 0), 0.0, 1.61086, 0, 0, Vector2(1, 1), 0.166472, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_vwfcb"]
+offsets = PackedFloat32Array(0.473333, 1)
+colors = PackedColorArray(0, 0, 0, 1, 1, 1, 1, 0)
+
+[sub_resource type="Gradient" id="Gradient_o2wg0"]
+colors = PackedColorArray(0, 0, 0, 1, 1, 1, 1, 0)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mkqi0"]
+emission_enabled = true
+emission = Color(0, 0.592157, 0.568627, 1)
+emission_energy_multiplier = 5.0
+
+[sub_resource type="SphereMesh" id="SphereMesh_ocwij"]
+material = SubResource("StandardMaterial3D_mkqi0")
+radius = 0.01
+height = 0.01
+
+[sub_resource type="Curve" id="Curve_omwma"]
+_data = [Vector2(0, 0), 0.0, 3.91209, 0, 0, Vector2(0.101124, 1), 0.18629, 0.18629, 0, 0, Vector2(1, 0), -5.70513, 0.0, 0, 0]
+point_count = 3
+
+[node name="DoubleJump_Ripple" type="CPUParticles3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.925767, 0)
+emitting = false
+amount = 2
+one_shot = true
+explosiveness = 1.0
+randomness = 1.0
+lifetime_randomness = 0.15
+mesh = SubResource("TorusMesh_om0gn")
+direction = Vector3(0, 0, 0)
+spread = 0.0
+gravity = Vector3(0, -0.1, 0)
+scale_amount_curve = SubResource("Curve_6tldr")
+color_ramp = SubResource("Gradient_vwfcb")
+color_initial_ramp = SubResource("Gradient_o2wg0")
+script = ExtResource("1_tjq77")
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
+autostart = true
+
+[node name="CPUParticles3D" type="CPUParticles3D" parent="."]
+amount = 30
+explosiveness = 0.61
+lifetime_randomness = 1.0
+mesh = SubResource("SphereMesh_ocwij")
+gravity = Vector3(0, 1, 0)
+initial_velocity_max = 3.0
+angular_velocity_max = 305.45
+scale_amount_curve = SubResource("Curve_omwma")
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

@@ -1,7 +1,7 @@
 [gd_scene load_steps=10 format=3 uid="uid://dycrx0qioni28"]
 
 [ext_resource type="PackedScene" uid="uid://pn00x1qgic1r" path="res://scenes/player/PLAYER.tscn" id="1_q2eer"]
-[ext_resource type="Script" path="res://scenes/player/PlayerCamera.gd" id="2_1cr6a"]
+[ext_resource type="Script" path="res://scripts/PlayerCamera.gd" id="2_1cr6a"]
 [ext_resource type="PackedScene" uid="uid://dwyv84hvnv2ed" path="res://scenes/items/crystal/crystal.tscn" id="3_s11to"]
 [ext_resource type="Script" path="res://levels/Terrain.gd" id="4_e4e5w"]
 [ext_resource type="PackedScene" uid="uid://c6gpsnjast360" path="res://scenes/structures/spawn.tscn" id="5_yrjrw"]
