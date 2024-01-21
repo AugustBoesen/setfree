@@ -1,10 +1,11 @@
-[gd_scene load_steps=9 format=3 uid="uid://pn00x1qgic1r"]
+[gd_scene load_steps=13 format=3 uid="uid://pn00x1qgic1r"]
 
 [ext_resource type="Script" path="res://scripts/PlayerController.gd" id="1_m2aip"]
 [ext_resource type="SpriteFrames" uid="uid://6ef8vlwebsd6" path="res://scenes/player/PlayerAnimatedSprite.tres" id="2_w2bx4"]
 [ext_resource type="AudioStream" uid="uid://c6qfyto1onfg0" path="res://assets/audio/player/ripple.mp3" id="3_1x3no"]
 [ext_resource type="AudioStream" uid="uid://dn3keg7ktltx4" path="res://assets/audio/player/walk.mp3" id="4_odkdd"]
 [ext_resource type="Environment" uid="uid://d1s668e7k1he6" path="res://shaders/Camera.tres" id="5_sor15"]
+[ext_resource type="AudioStream" uid="uid://bymjcsr0mvap5" path="res://assets/audio/items/crystal_get_reverse.mp3" id="6_fgmt5"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_erspx"]
 
@@ -12,6 +13,19 @@
 radius = 2.26269
 
 [sub_resource type="SeparationRayShape3D" id="SeparationRayShape3D_3hajb"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0tr41"]
+emission_enabled = true
+emission = Color(0, 0.623529, 0.729412, 1)
+emission_energy_multiplier = 10.0
+
+[sub_resource type="PrismMesh" id="PrismMesh_idgbw"]
+material = SubResource("StandardMaterial3D_0tr41")
+size = Vector3(0.1, 0.1, 0.1)
+
+[sub_resource type="Curve" id="Curve_8kcs3"]
+_data = [Vector2(0.38764, 0), 0.0, 0.0, 0, 0, Vector2(0.589888, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
 
 [node name="PLAYER" type="CharacterBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
@@ -58,3 +72,24 @@ spring_length = 10.0
 
 [node name="PlayerCamera" type="Camera3D" parent="CameraSpringArm"]
 environment = ExtResource("5_sor15")
+
+[node name="crystalGetAnim" type="CPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0818555, 0)
+emitting = false
+amount = 92
+lifetime = 0.7
+one_shot = true
+explosiveness = 0.34
+local_coords = true
+mesh = SubResource("PrismMesh_idgbw")
+emission_shape = 2
+emission_sphere_radius = 5.0
+direction = Vector3(1, 1, 0)
+spread = 180.0
+gravity = Vector3(0, 0, 0)
+radial_accel_min = -27.0
+radial_accel_max = -15.0
+scale_amount_curve = SubResource("Curve_8kcs3")
+
+[node name="crystalGetSound" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("6_fgmt5")

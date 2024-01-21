@@ -122,7 +122,11 @@ func activate():
 			var objectInRange = objectsInRange[0]
 			# Crystal finding method
 			if objectInRange is CrystalActivate:
-				objectInRange.get_parent_node_3d().queue_free()
+				await get_tree().create_timer(1.0).timeout
+				$crystalGetAnim.emitting = true
+				$crystalGetSound.play()
+				await get_tree().create_timer(1.0).timeout
+				objectInRange.queue_free()
 				crystalsCollected += 1
 
 

@@ -1,18 +1,38 @@
-[gd_scene load_steps=9 format=3 uid="uid://dwyv84hvnv2ed"]
+[gd_scene load_steps=14 format=3 uid="uid://dwyv84hvnv2ed"]
 
 [ext_resource type="ArrayMesh" uid="uid://c3v3krcrbpqso" path="res://assets/models/crystal/Crystal.obj" id="1_dg1x1"]
 [ext_resource type="Script" path="res://scripts/Crystal.gd" id="2_kupou"]
 [ext_resource type="AudioStream" uid="uid://cukn3uim346hp" path="res://assets/audio/items/crystal.mp3" id="3_7b01m"]
 [ext_resource type="Script" path="res://scripts/CrystalAudio.gd" id="4_a7hkk"]
+[ext_resource type="AudioStream" uid="uid://de3x7dlwwkf4y" path="res://assets/audio/items/crystal_get.mp3" id="5_6yb0b"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_d0v4t"]
+radius = 3.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ae6qn"]
+emission_enabled = true
+emission = Color(0, 0.623529, 0.729412, 1)
+emission_energy_multiplier = 10.0
+
+[sub_resource type="PrismMesh" id="PrismMesh_qltck"]
+material = SubResource("StandardMaterial3D_ae6qn")
+size = Vector3(0.1, 0.1, 0.1)
+
+[sub_resource type="Curve" id="Curve_qdily"]
+min_value = -2.0
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, -1.27473), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_64ln4"]
+_data = [Vector2(0.0617978, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jk186"]
 metallic = 1.0
 metallic_specular = 1.0
 emission_enabled = true
 emission = Color(0, 0.235294, 0.215686, 1)
-
-[sub_resource type="SphereShape3D" id="SphereShape3D_d0v4t"]
-radius = 3.0
+emission_energy_multiplier = 9.0
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mmocp"]
 emission_enabled = true
@@ -25,24 +45,45 @@ material = SubResource("StandardMaterial3D_mmocp")
 size = Vector2(0.1, 0.1)
 orientation = 2
 
-[node name="Crystal" type="MeshInstance3D"]
-transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0, 0)
+[node name="CrystalArea" type="Area3D"]
+script = ExtResource("2_kupou")
+
+[node name="CrystalActivateCollision" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_d0v4t")
+
+[node name="crystalGetSound" type="AudioStreamPlayer3D" parent="."]
+transform = Transform3D(3.33333, 0, 0, 0, 3.33333, 0, 0, 0, 3.33333, 0, 0, 0)
+stream = ExtResource("5_6yb0b")
+
+[node name="crystalGetAnim" type="CPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.27009, 0)
+emitting = false
+amount = 92
+lifetime = 1.5
+one_shot = true
+explosiveness = 0.8
+mesh = SubResource("PrismMesh_qltck")
+emission_shape = 1
+emission_sphere_radius = 1.0
+direction = Vector3(1, 1, 0)
+spread = 180.0
+gravity = Vector3(0, 3, 0)
+radial_accel_min = 6.0
+radial_accel_max = 7.0
+radial_accel_curve = SubResource("Curve_qdily")
+scale_amount_curve = SubResource("Curve_64ln4")
+
+[node name="Crystal" type="MeshInstance3D" parent="."]
 mesh = ExtResource("1_dg1x1")
 surface_material_override/1 = SubResource("StandardMaterial3D_jk186")
 
-[node name="CrystalArea" type="Area3D" parent="."]
-script = ExtResource("2_kupou")
-
-[node name="CrystalActivateCollision" type="CollisionShape3D" parent="CrystalArea"]
-shape = SubResource("SphereShape3D_d0v4t")
-
-[node name="CPUParticles3D" type="CPUParticles3D" parent="."]
+[node name="CPUParticles3D" type="CPUParticles3D" parent="Crystal"]
 mesh = SubResource("PlaneMesh_3p8dq")
 emission_shape = 1
 emission_sphere_radius = 2.29
 gravity = Vector3(0, 1, 0)
 
-[node name="Bells rolling in a metal pipe" type="AudioStreamPlayer3D" parent="."]
+[node name="Bells rolling in a metal pipe" type="AudioStreamPlayer3D" parent="Crystal"]
 stream = ExtResource("3_7b01m")
 unit_size = 2.0
 script = ExtResource("4_a7hkk")
