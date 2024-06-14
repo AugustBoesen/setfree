@@ -1,0 +1,63 @@
+[gd_resource type="Resource" script_class="DialogueData" load_steps=2 format=3 uid="uid://b6083efitte1d"]
+
+[ext_resource type="Script" path="res://addons/dialogue_nodes/objects/DialogueData.gd" id="1_drk7y"]
+
+[resource]
+script = ExtResource("1_drk7y")
+starts = {
+"testdialogue": &"0_1"
+}
+nodes = {
+"0_1": {
+"link": &"1_1",
+"offset": Vector2(-850.909, -211.818),
+"start_id": "testdialogue"
+},
+"1_1": {
+"dialogue": "WITNESS ME!",
+"offset": Vector2(-580, -160),
+"options": {
+0: {
+"condition": {},
+"link": &"1_3",
+"text": "Okay!"
+},
+1: {
+"condition": {},
+"link": &"1_2",
+"text": "No!"
+}
+},
+"size": Vector2(300, 275),
+"speaker": "God"
+},
+"1_2": {
+"dialogue": "God stays silent. Perhaps it was just a box.",
+"offset": Vector2(5.08751, 63.836),
+"options": {
+0: {
+"condition": {},
+"link": "END",
+"text": ""
+}
+},
+"size": Vector2(300, 240),
+"speaker": ""
+},
+"1_3": {
+"dialogue": "You feel warm. Maybe god IS real.",
+"offset": Vector2(0, -220),
+"options": {
+0: {
+"condition": {},
+"link": "END",
+"text": ""
+}
+},
+"size": Vector2(300, 240),
+"speaker": ""
+}
+}
+variables = {}
+strays = Array[String]([])
+characters = ""

@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://b33cy2g17y2ex"
+path="res://.godot/imported/newelpost.obj-b5ed9ab9065bf81f3840aa6d8d05908b.mesh"
+
+[deps]
+
+files=["res://.godot/imported/newelpost.obj-b5ed9ab9065bf81f3840aa6d8d05908b.mesh"]
+
+source_file="res://assets/models/asterite/newelpost.obj"
+dest_files=["res://.godot/imported/newelpost.obj-b5ed9ab9065bf81f3840aa6d8d05908b.mesh", "res://.godot/imported/newelpost.obj-b5ed9ab9065bf81f3840aa6d8d05908b.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false

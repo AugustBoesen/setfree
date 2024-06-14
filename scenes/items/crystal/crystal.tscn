@@ -87,3 +87,8 @@ gravity = Vector3(0, 1, 0)
 stream = ExtResource("3_7b01m")
 unit_size = 2.0
 script = ExtResource("4_a7hkk")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="Crystal"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.20711, 0)
+light_color = Color(0.552941, 0.898039, 0.976471, 1)
+light_energy = 5.0

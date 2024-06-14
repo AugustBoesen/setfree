@@ -54,6 +54,11 @@ func handle_animations():
 				walksound.pitch_scale = randf_range(0.8, 1.2)
 				walksound.play()
 				$WalkSound/WalkTimer.start(0.3)
+				
+		if global_transform.origin.z > -6:
+			var new_position = global_transform.origin
+			new_position.z = -6
+			global_transform.origin = new_position
 
 #Ascending and descending
 	if not is_on_floor() and velocity.y != 0:
@@ -128,6 +133,9 @@ func activate():
 				await get_tree().create_timer(1.0).timeout
 				objectInRange.queue_free()
 				crystalsCollected += 1
+			# NPC dialogue activation
+			if objectInRange is NPC:
+				pass;
 
 
 func _physics_process(delta):

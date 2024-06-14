@@ -15,7 +15,7 @@ func _process(delta):
 
 # Currently loads level 0, implement level selection menu
 func _on_start_btn_pressed():
-	SceneManager.loadNewLevel("res://levels/Level0.tscn")
+	SceneManager.loadNewLevel("res://levels/Level0.5.tscn")
 
 
 func _on_quit_btn_pressed():

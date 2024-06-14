@@ -1,0 +1,47 @@
+[gd_scene load_steps=11 format=3 uid="uid://bc4gbcf3nrxxi"]
+
+[ext_resource type="Script" path="res://scripts/NonHostileNPC.gd" id="1_x7pgp"]
+[ext_resource type="Script" path="res://addons/dialogue_nodes/objects/DialogueBox.gd" id="2_6c27b"]
+[ext_resource type="Resource" uid="uid://b6083efitte1d" path="res://scripts/dialogue/test.tres" id="3_gmgfn"]
+[ext_resource type="Script" path="res://addons/dialogue_nodes/objects/bbcodeWait.gd" id="4_y3w63"]
+[ext_resource type="Script" path="res://addons/dialogue_nodes/objects/bbcodeGhost.gd" id="5_e3l6x"]
+[ext_resource type="Script" path="res://addons/dialogue_nodes/objects/bbcodeMatrix.gd" id="6_6buxq"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_11iy8"]
+radius = 3.0
+
+[sub_resource type="RichTextEffect" id="RichTextEffect_ec0r5"]
+script = ExtResource("4_y3w63")
+
+[sub_resource type="RichTextEffect" id="RichTextEffect_akycb"]
+script = ExtResource("5_e3l6x")
+
+[sub_resource type="RichTextEffect" id="RichTextEffect_cjko4"]
+script = ExtResource("6_6buxq")
+
+[node name="TalkingBox" type="Area3D"]
+script = ExtResource("1_x7pgp")
+
+[node name="NPCActivateCollision" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_11iy8")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+use_collision = true
+
+[node name="DialogueBox" type="Panel" parent="."]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -576.0
+offset_top = -157.0
+offset_right = 576.0
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_horizontal = 4
+size_flags_vertical = 8
+script = ExtResource("2_6c27b")
+data = ExtResource("3_gmgfn")
+start_id = "testdialogue"
+custom_effects = Array[RichTextEffect]([SubResource("RichTextEffect_ec0r5"), SubResource("RichTextEffect_akycb"), SubResource("RichTextEffect_cjko4")])

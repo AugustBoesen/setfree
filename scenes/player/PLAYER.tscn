@@ -66,9 +66,10 @@ wait_time = 0.5
 one_shot = true
 
 [node name="CameraSpringArm" type="SpringArm3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.819152, 0.573576, 0, -0.573576, 0.819152, 0, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 0.906307, 0.422618, 0, -0.422618, 0.906307, 0, 0, 0)
 shape = SubResource("SeparationRayShape3D_3hajb")
 spring_length = 10.0
+margin = 1.0
 
 [node name="PlayerCamera" type="Camera3D" parent="CameraSpringArm"]
 environment = ExtResource("5_sor15")

@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://dumpov6ex7ijq"
+path="res://.godot/imported/5.obj-7a5d4ec37b5994b0f656ecbea5ccf830.mesh"
+
+[deps]
+
+files=["res://.godot/imported/5.obj-7a5d4ec37b5994b0f656ecbea5ccf830.mesh"]
+
+source_file="res://assets/models/asterite/PillerParts/5.obj"
+dest_files=["res://.godot/imported/5.obj-7a5d4ec37b5994b0f656ecbea5ccf830.mesh", "res://.godot/imported/5.obj-7a5d4ec37b5994b0f656ecbea5ccf830.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false

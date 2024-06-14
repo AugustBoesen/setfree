@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://dovq06nbw55xu"
+path="res://.godot/imported/block1.4slide.obj-c1fc62a08f17d504c2a4fd737745d7c7.mesh"
+
+[deps]
+
+files=["res://.godot/imported/block1.4slide.obj-c1fc62a08f17d504c2a4fd737745d7c7.mesh"]
+
+source_file="res://assets/models/asterite/block1.4slide.obj"
+dest_files=["res://.godot/imported/block1.4slide.obj-c1fc62a08f17d504c2a4fd737745d7c7.mesh", "res://.godot/imported/block1.4slide.obj-c1fc62a08f17d504c2a4fd737745d7c7.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false

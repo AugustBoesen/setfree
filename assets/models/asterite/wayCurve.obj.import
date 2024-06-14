@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://xtm4aeyo8nw0"
+path="res://.godot/imported/wayCurve.obj-1f56e1d9e04f83373395a64efadf581c.mesh"
+
+[deps]
+
+files=["res://.godot/imported/wayCurve.obj-1f56e1d9e04f83373395a64efadf581c.mesh"]
+
+source_file="res://assets/models/asterite/wayCurve.obj"
+dest_files=["res://.godot/imported/wayCurve.obj-1f56e1d9e04f83373395a64efadf581c.mesh", "res://.godot/imported/wayCurve.obj-1f56e1d9e04f83373395a64efadf581c.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false
